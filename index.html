@@ -126,12 +126,12 @@
     <section id="quiz" class="quiz-section">
         <h2 class="section-title">🧠 Teste Seus Conhecimentos</h2>
         <div class="quiz-container">
-            <form>
+            <form id="quizForm">
                 <div class="question">
                     <h3>1. Qual é a primeira etapa do ciclo do alimento?</h3>
                     <div class="quiz-option">
                         <input type="radio" id="q1a" name="question1" value="correct">
-                        <label for="q1a">A) Plantio e preparação do solo ✓</label>
+                        <label for="q1a">A) Plantio e preparação do solo</label>
                     </div>
                     <div class="quiz-option">
                         <input type="radio" id="q1b" name="question1" value="incorrect">
@@ -155,7 +155,7 @@
                     </div>
                     <div class="quiz-option">
                         <input type="radio" id="q2b" name="question2" value="correct">
-                        <label for="q2b">B) Transformação e preparação para consumo ✓</label>
+                        <label for="q2b">B) Transformação e preparação para consumo</label>
                     </div>
                     <div class="quiz-option">
                         <input type="radio" id="q2c" name="question2" value="incorrect">
@@ -179,7 +179,7 @@
                     </div>
                     <div class="quiz-option">
                         <input type="radio" id="q3c" name="question3" value="correct">
-                        <label for="q3c">C) Compostagem e reciclagem ✓</label>
+                        <label for="q3c">C) Compostagem e reciclagem</label>
                     </div>
                     <div class="quiz-option">
                         <input type="radio" id="q3d" name="question3" value="incorrect">
@@ -188,10 +188,11 @@
                 </div>
 
                 <div class="quiz-results">
-                    <h4>📝 Dicas para o Quiz:</h4>
-                    <p>• Selecione as opções que melhor representam cada etapa do ciclo alimentar</p>
-                    <p>• As respostas corretas estão marcadas com ✓</p>
-                    <p>• Pense na sequência lógica: plantio → colheita → processamento → distribuição → consumo → sustentabilidade</p>
+                    <h4>📝 Como funciona:</h4>
+                    <p>• Clique em uma das opções para ver o resultado</p>
+                    <p>• Verde = Resposta correta ✓</p>
+                    <p>• Vermelho = Resposta incorreta ✗</p>
+                    <p>• Pense na sequência: plantio → colheita → processamento → distribuição → consumo → sustentabilidade</p>
                 </div>
             </form>
         </div>
@@ -219,7 +220,7 @@
             </div>
             
             <div class="footer-section">
-                <h3>Agrinho 2024</h3>
+                <h3>Agrinho 2025</h3>
                 <p>
                     Desenvolvido para o programa educacional Agrinho, 
                     conectando conhecimento sobre agricultura e alimentação.
@@ -228,8 +229,45 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2024 Projeto Agrinho - Ciclo do Alimento. Desenvolvido com 💚 para educar.</p>
+            <p>&copy; 2025 Projeto Agrinho - Ciclo do Alimento. Desenvolvido com 💚 para educar.</p>
         </div>
     </footer>
+
+    <script>
+        // Quiz functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const questions = document.querySelectorAll('.question');
+            
+            questions.forEach(question => {
+                const radioButtons = question.querySelectorAll('input[type="radio"]');
+                const options = question.querySelectorAll('.quiz-option');
+                
+                radioButtons.forEach(radio => {
+                    radio.addEventListener('change', function() {
+                        // Reset all options in this question
+                        options.forEach(option => {
+                            option.classList.remove('correct', 'incorrect', 'disabled');
+                        });
+                        
+                        // Show feedback for all options
+                        options.forEach(option => {
+                            const input = option.querySelector('input[type="radio"]');
+                            if (input.value === 'correct') {
+                                option.classList.add('correct');
+                            } else {
+                                option.classList.add('incorrect');
+                            }
+                            option.classList.add('disabled');
+                        });
+                        
+                        // Disable all radio buttons in this question
+                        radioButtons.forEach(btn => {
+                            btn.disabled = true;
+                        });
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
